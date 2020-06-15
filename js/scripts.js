@@ -1,6 +1,6 @@
 function Travels() {
  this.destinations = [];
- this.currentid = 0;
+ this.currentId = 0;
 }
 
 Travels.prototype.addDestination = function(destination) {
@@ -9,7 +9,7 @@ Travels.prototype.addDestination = function(destination) {
 }
 
 Travels.prototype.assignId = function () {
-  this.currentid += 1;
+  this.currentId += 1;
   return this.currentId;
 }
 
@@ -24,7 +24,7 @@ Travels.prototype.findDestination = function(id) {
     return false;
 }
 
-Travels.prototype.deleteContact = function(id) {
+Travels.prototype.deleteDestination = function(id) {
   for(let i=0; i<this.destinations.length; i++) {
     if(this.destinations[i]) {
       if(this.destinations[i].id == id) {
@@ -55,12 +55,36 @@ function displayDestinationDetails(travelsToDisplay) {
   let destinationList = $("ul#destinations");
   let htmlForDestinationInfo = "";
   travelsToDisplay.destinations.forEach(function(destination) {
-    htmlForDestinationInfo += "<li id=" + destination.id + ">" + destination.destination + " " + destination.landmark + " " + destination.timeOfYear + " " + destination.activities + "</li>";
+    htmlForDestinationInfo += "<li id=" + destination.id + ">" + destination.location + " " + destination.landmark + " " + destination.timeOfYear + " " + destination.activity + "</li>";
   });
   destinationList.html(htmlForDestinationInfo);
 };
 
+function showDestination(destinationId) {
+  const destination = destination.findDestination(destinationId);
+  $("#show-destinations").show();
+  $(".destination").html(destination.location);
+  $(".landmark").html(destination.landmark);
+  $(".timeOfYear").html(destination.timeOfYear);
+  $(".activities").html(destination.activity);
+  let buttons = $("#buttons");
+  buttons.empty();
+  buttons.append("<button class='deleteButton' id=" + + destination.id + ">Delete</button>");
+}
+
+function attachDestinationListeners() {
+  $("ul#destinations").on("click", "li", function() {
+   showDestination(this.id);
+  });
+  $("#buttons").on("click", ".deleteButton", function(){
+    destination.deleteDestination(this.id)
+   $("#show-destinations").hide();
+   displayDestinationDetails(destination);
+  });
+};
+
 $(document).ready(function() {
+  attachDestinationListeners();
   $("form#new-destination").submit(function(event) {
     event.preventDefault();
     const inputtedDestination = $("input#destination").val();
