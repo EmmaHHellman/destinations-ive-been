@@ -15,7 +15,10 @@ _This project takes inputs from the user to create an object with various places
 | Program gathers input data from the user, such as location, date of visit, and landmarks. | Mt. Hood | none |
 | Program has an add button/function which stores user input in an object | Mt. Hood | place = {Location: "Mt. Hood"} |
 | Program adds the updated contact into a list | Mt. Hood | <li>Mt. Hood</li> |
-| Program has an click event listener which allows user to click on a list item to view other object details such as landmark and time of year | $("input#place").click(); | Mt Hood: 
+| Program has a delete which deletes a place from the list | function delete(place) {}; | place (removed) |
+| Program has a function that assigns each new location an id number when it is added | add(Chicago); or add(Miami);| <li id=1>Chicago</li> or <li id=2>Miami</li> |
+| Program has an click event listener which allows user to click on a list item to view other object details such as landmark, time of year, activities | $("input#place").click(); | Mt. Hood: Mountain, Winter, Skied with friends |
+| Program displays destination, landmarks, time of Year and notes in a list | Chicago: Willis Tower, Summer, Notes | <li>Chicago</li>, <li>Willis Tower</li>, <li>Summer</li>, <li>Notes</li> |
 
 ## Setup/Installation Requirements
 
