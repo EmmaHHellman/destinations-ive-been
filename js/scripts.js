@@ -47,6 +47,28 @@ Destination.prototype.fullList = function() {
   return this.location + " " + this.landmark + " " + this.timeOfYear + " " + this.activity;
 }
 
-$(document).ready(function(){
-  
+//Below: User-Interface Logic
+
+let destination = new Travels();
+
+function displayDestinationDetails(travelsToDisplay) {
+  let destinationList = $("ul#destinations");
+  let htmlForDestinationInfo = "";
+  travelsToDisplay.destinations.forEach(function(destination) {
+    htmlForDestinationInfo += "<li id=" + destination.id + ">" + destination.destination + " " + destination.landmark + " " + destination.timeOfYear + " " + destination.activities + "</li>";
+  });
+  destinationList.html(htmlForDestinationInfo);
+};
+
+$(document).ready(function() {
+  $("form#new-destination").submit(function(event) {
+    event.preventDefault();
+    const inputtedDestination = $("input#destination").val();
+    const inputtedLandmark = $("input#landmark").val();
+    const inputtedtimeOfYear = $("input#timeOfYear").val();
+    const inputtedActivities = $("input#activities").val();
+    let newDestination = new Destination(inputtedDestination, inputtedLandmark, inputtedtimeOfYear, inputtedActivities);
+    destination.addDestination(newDestination);
+    displayDestinationDetails(destination);
+  })
 })
